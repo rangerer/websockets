@@ -5,8 +5,10 @@ import asyncio
 import websockets
 
 async def client(uri):
-    async with websockets.connect(uri) as websocket:
-        print("Quit by pressing Ctrl+D")
+    # add support for OCPP
+    available_subprotocols = ('ocpp1.6', 'ocpp1.5')
+    async with websockets.connect(uri, subprotocols=available_subprotocols) as websocket:
+        print("Quit by pressing Ctrl+d")
         while True:
             try:
                 message = input("> ")

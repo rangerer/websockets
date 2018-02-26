@@ -15,3 +15,11 @@ Start the echo server with
 Start the client with
 
     ./client.py
+
+Start an OCPP session with
+
+    ./client.py <host> <port>
+    
+    > [0,1,"Heartbeat",[]]
+    < ...
+    > C-d
