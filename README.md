@@ -11,3 +11,7 @@ see [WebSockets Library](http://websockets.readthedocs.io/en/stable/index.html)
 Start the echo server with
 
     ./server.py
+
+Start the client with
+
+    ./client.py
