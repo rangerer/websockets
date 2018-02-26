@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import argparse
 import asyncio
 import websockets
 
@@ -16,5 +17,11 @@ async def client(uri):
             print("< {}".format(response))
 
 if __name__ == "__main__":
+    # parse command line arguments
+    parser = argparse.ArgumentParser(description="Websocket Client")
+    parser.add_argument("host", default="localhost", nargs="?", help="websocket server host")
+    parser.add_argument("port", default="8765", nargs="?", help="websocket server port")
+    args = parser.parse_args()
+
     asyncio.get_event_loop().run_until_complete(
-        client('ws://localhost:8765'))
+        client('ws://{}:{}'.format(args.host, args.port)))
