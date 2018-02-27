@@ -4,11 +4,20 @@ import argparse
 import asyncio
 import websockets
 
-async def client(uri):
+def print_headers(title, headers):
+    print("--- {} begin ---".format(title))
+    for header in headers:
+        print("{}: {}".format(*header))
+    print("--- {} end ---".format(title))
+
+async def client(uri, verbosity=0):
     # add support for OCPP
     available_subprotocols = ('ocpp1.6', 'ocpp1.5')
     async with websockets.connect(uri, subprotocols=available_subprotocols) as websocket:
         print("Quit by pressing Ctrl+d")
+        if verbosity > 0:
+            print_headers("request headers", websocket.raw_request_headers)
+            print_headers("response headers", websocket.raw_response_headers)
         while True:
             try:
                 message = input("> ")
@@ -23,7 +32,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Websocket Client")
     parser.add_argument("host", default="localhost", nargs="?", help="websocket server host")
     parser.add_argument("port", default="8765", nargs="?", help="websocket server port")
+    parser.add_argument("--verbose", "-v", action='count', default=0, help="increase verbosity")
     args = parser.parse_args()
 
     asyncio.get_event_loop().run_until_complete(
-        client('ws://{}:{}'.format(args.host, args.port)))
+        client('ws://{}:{}'.format(args.host, args.port), args.verbose))
