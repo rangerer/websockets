@@ -18,7 +18,7 @@ Start the client with
 
 Start an OCPP session with
 
-    pipenv run python client.py <host> <post>
+    pipenv run python client.py ws://<host>:<post>/<path>
     
     > [0,1,"Heartbeat",[]]
     < ...

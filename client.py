@@ -30,10 +30,9 @@ async def client(uri, verbosity=0):
 if __name__ == "__main__":
     # parse command line arguments
     parser = argparse.ArgumentParser(description="Websocket Client")
-    parser.add_argument("host", default="localhost", nargs="?", help="websocket server host")
-    parser.add_argument("port", default="8765", nargs="?", help="websocket server port")
+    parser.add_argument("uri", default="ws://localhost:8765", nargs="?", help="websocket server uri")
     parser.add_argument("--verbose", "-v", action='count', default=0, help="increase verbosity")
     args = parser.parse_args()
 
     asyncio.get_event_loop().run_until_complete(
-        client('ws://{}:{}'.format(args.host, args.port), args.verbose))
+        client(args.uri, args.verbose))
