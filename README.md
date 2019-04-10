@@ -32,8 +32,8 @@ Generate self-signed server certificate
 
 Start secure websocket server with
 
-    pipenv run python server.py --certfile=<server.crt> --keyfile=<server.key>
+    pipenv run python server.py --certfile=server.crt --keyfile=server.key
 
 Start secure websocket client with
 
-    pipenv run python client.py wss://localhost:8765 --cafile=<server.crt>
+    pipenv run python client.py wss://localhost:8765 --cafile=server.crt
