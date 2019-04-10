@@ -6,19 +6,19 @@ see [WebSockets Library](http://websockets.readthedocs.io/en/stable/index.html)
 
 ## Usage
 
-    mkvirtualenv -p /usr/bin/python3 -r requirements.txt websockets
+    pipenv install
 
 Start the echo server with
 
-    ./server.py
+    pipenv run python server.py
 
 Start the client with
 
-    ./client.py
+    pipenv run python client.py
 
 Start an OCPP session with
 
-    ./client.py <host> <port>
+    pipenv run python client.py <host> <post>
     
     > [0,1,"Heartbeat",[]]
     < ...
