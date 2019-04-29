@@ -45,6 +45,7 @@ if __name__ == "__main__":
     parser.add_argument("--cafile", nargs="?", help="SSL CA file")
     parser.add_argument("--certfile", nargs="?", help="SSL client certificate file")
     parser.add_argument("--keyfile", nargs="?", help="SSL private key file")
+    parser.add_argument("--ignorecert", default=False, action="store_true", help="SSL ignore server cert failures")
     args = parser.parse_args()
 
     client_options = {}
@@ -59,6 +60,10 @@ if __name__ == "__main__":
             if args.keyfile:
                 cert_chain_options["keyfile"] = abspath(args.keyfile)
             sslcontext.load_cert_chain(abspath(args.certfile), **cert_chain_options)
+        if args.ignorecert:
+            sslcontext.check_hostname = False
+            sslcontext.verify_mode = ssl.CERT_NONE
+
         client_options["sslcontext"] = sslcontext
 
     asyncio.get_event_loop().run_until_complete(
