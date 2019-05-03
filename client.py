@@ -45,6 +45,7 @@ if __name__ == "__main__":
     parser.add_argument("--cafile", nargs="?", help="SSL CA file")
     parser.add_argument("--certfile", nargs="?", help="SSL client certificate file")
     parser.add_argument("--keyfile", nargs="?", help="SSL private key file")
+    parser.add_argument("--no-check-hostname", action="store_true", help="disable SSL certificate hostname check")
     args = parser.parse_args()
 
     client_options = {}
@@ -52,6 +53,8 @@ if __name__ == "__main__":
     # configure SSL context for secure websocket connections
     if args.uri.startswith('wss'):
         sslcontext = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
+        if args.no_check_hostname:
+            sslcontext.check_hostname = False
         if args.cafile:
             sslcontext.load_verify_locations(cafile=abspath(args.cafile))
         if args.certfile:
