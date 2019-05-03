@@ -37,3 +37,7 @@ Start secure websocket server with
 Start secure websocket client with
 
     pipenv run python client.py wss://localhost:8765 --cafile=server.crt
+
+Retrieve server certificate
+
+    openssl s_client -showcerts -connect <host>:<port> </dev/null | openssl x509 >server.crt
