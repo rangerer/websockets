@@ -18,7 +18,7 @@ def print_headers(title, headers):
 async def client(uri, verbosity=0, sslcontext=False):
     websocket_options = {
         # add support for OCPP
-        'subprotocols': ('ocpp1.6', 'ocpp1.5')
+        'subprotocols': ('ocpp2.0.1', 'ocpp1.6', 'ocpp1.5')
     }
     if sslcontext:
         websocket_options["ssl"] = sslcontext
